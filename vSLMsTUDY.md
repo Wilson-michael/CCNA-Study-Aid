@@ -1,5 +1,8 @@
 # VLSM slash notes
 
+## Overview ##
+While studying the process of Variable Length Subnet Masking, creating a table for each subnet size helped me to be more efficient at creating different subnets and avoiding the mistakes that were most common for me.
+
 
 ## /24
 | subnet mask              | 255.255.255.0                       |
