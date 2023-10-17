@@ -1,4 +1,8 @@
-# VLSM slash notes
+# Variable Length Subnet Masking (VLSM) slash notes
+
+## Overview 
+
+While studying the process of Variable Length Subnet Masking, creating a table for each subnet size helped me to be more efficient at creating different subnets and avoiding the mistakes that were most common for me. This is currently only identifying Class C networks, but may continue into Classes A and B in the future.
 
 
 ## /24
