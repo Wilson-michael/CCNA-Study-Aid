@@ -17,8 +17,11 @@
     6- Source and Destination IP
 
 # Configuring an EtherChannel
-  To see the current configuration, in privileged exec mode, enter the command _show etherchannel load-balance_. This will display both general and per-protocol configurations.
-  To change the configuration, enter global configuration mode, then use the command _port-channel load-balance_, followed by the desired configuration, e.g. _src-dst-mac_
+  To see the current configuration,use the following commands.
+  
+    1. In privileged exec mode,  _show etherchannel load-balance_. (This will display both general and per-protocol configurations.)
+    2. To change the configuration, enter global configuration mode, then use the command _port-channel load-balance_, followed by the desired configuration, e.g. _src-dst-mac_
+    
   Remember, etherchannel is the command used in the CISCO CLI to view the configuration, while port-channel is used to configure.
 
 # Methods of EtherChannel configuration on Layer 2 CISCO switches
