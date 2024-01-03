@@ -20,9 +20,35 @@
   To change the configuration, enter global configuration mode, then use the command _port-channel load-balance_, followed by the desired configuration, e.g. _src-dst-mac_
   Remember, etherchannel is the command used in the CISCO CLI to view the configuration, while port-channel is used to configure.
 
-# Methods of EtherChannel configuration on CISCO switches
+# Methods of EtherChannel configuration on Layer 2 CISCO switches
   There are three different methods of configuration 
     1- Port Aggrecation Protocol (PAgP): A CISCO proprietary protocol, it dynamically negotiates the creation and maintenance of EtherChannels between CISCO switches. Much like DTP does for trunking, it sends frames to the neighboring switch to determine whether or not it wants to form and EtherChannel.
     2- Link Aggregation Control Protocol (LACP): The industry standard protocol (IEEE 802.3ad), it performs the same function as PAgP, but can be used to be formed EtherChannels between switches from different manufacturers. This makes LACP the preferred method of EtherChannel configuration.
     3-Static EtherChannel: The switch doesn't use a protocol to determine if an EtherChannel should be formed, rather, interfaces are statically configured to form and EtherChannel. This is not typically used, because you want your switches to be able to dynamically maintain the EtherChannels in the case of interface failures.
   Up to 8 interfaces can be formed into a single EtherChannel (though when using LACP, up to 16 are allowed, with 8 active and 8 reserved in standby in case of active interface failure)
+  Steps for Configuration
+    1. Enter global config mode
+    2. Enter command _Interface range_ followed by the range you want to set as an EtherChannel, e.g. g0/0 - 3
+    3. Enter command _channel-group_ followed by the number you want to assign to the group (must match for member interfaces on the same switch, does not need to match the channel group number on the other switch), followed by one of the following commands:
+      a. active- enables LACP unconditionally. Will form an EtherChannel with any device set to either active or passive.
+      b. auto- enables PAgP only if a PAgP device is detected. Two devices with auto mode will not form an EtherChannel.
+      c. desirable- enables PAgP unconditionally. Will form an EtherChannel with any device set to either auto or desirable.
+      d. on- EtherChannel only. Static EtherChannel configuration, only works with on mode.
+      e. passive- enables LACP only if another LACP device is detected. Two devices with passive mode will not form an EtherChannel
+    You can also use the command _protocol_ to manually configure the negotiation protocol to either LACP or PAgP. You must then configure the group to the appropriate mode.   This is typically not something you would do, as autonegotiation is much more efficient.
+  After you have finished configuring the channel group, you configure it to trunk mode as if it were a single interface, with the following commands.
+    1. In global configuration mode, _interface port-channel (number)_
+    2. _switchport trunk encapsulation (encapsulation type)_
+    3. _switchport mode trunk_
+  In addition to configuring the port channel, this will also configure the individual physical interfaces in the group the same way. This is crucial, as all interfaces in the group must have matching configurations, including not only the same switchport mode, but the same duplex, the same speed and the same native and allowed VLAN range. If one or more of the physical interfaces configurations do not match the group, they will be set to "suspended", and will not function until the configuration mismatch is fixed.
+
+# Notes on Layer 3 switches
+  Modern networks are shifting towards using layer three switches as the default, due to the fact that STP is not an issue between Layer 3 switches (layer 3 switches do not forward layer 2 frames, so there can be no layer 2 loop created). 
+  To configure a Layer 3 EtherChannel, use the following commands.
+    1. In global configuration mode, _int range (interface range you want to be in the group)_
+    2. _no switchport_ (thus making them layer 3 routed interfaces)
+    3. _channel-group (number) mode active_
+    4. _int po(group number assigned above)_
+    5. _ip address (ip address and subnet mask)_
+
+This has covered the basic overview of configuring EtherChannels on both 
