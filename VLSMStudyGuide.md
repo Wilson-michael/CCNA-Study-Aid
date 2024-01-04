@@ -1,4 +1,9 @@
-# Variable Length Subnetting Method (VLSM) slash notes
+## Variable Length Subnetting Method (VLSM) slash notes
+
+## Overview 
+
+A hugely important aspect of Networking is understanding and implementing Variable Length Subnet Masking. I found that creating a table for each subnet size helped me to be more efficient at creating different subnets and avoiding the mistakes that were most common for me. This is currently only identifying Class C networks, but may continue into Classes A and B in the future.
+
 
 
 ## /24
