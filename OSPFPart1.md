@@ -2,7 +2,7 @@
 
     A Study guide on the basics of Open Shortest Path First (OSPF)protocol
 
-# What is OPSF
+# What is OSPF
 
     OSPF is the most common Link State IGRP used in networking. Link State Routing Protocols create a "connectivity map" of its network, passing that map along to each of it's neighbors until all routers in the network have the same complete map. They each use this map to determine the best paths in the network. OSPF uses the "Shortest Path First" algorithm, also known as "Dijkstra's Algorithm", named for it's creator, Edsger Dijkstra. 
     There are three versions of OSPF. OSPF1 was created in 1989, and is not in use anymore. OSPF2 was released in 1998, and is the version typically used for IPv4. OSPF2 is also the version covered in the CCNA Exam. OSPF3 was released in 2008, and can be used for both IPv6 and IPv4, though OSPF2 is more common.
