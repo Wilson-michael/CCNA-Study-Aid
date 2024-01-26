@@ -1,10 +1,12 @@
 ## EtherChannel Study guide
 
 # What is EtherChannel used for
+  
   While Spanning Tree Protocols are incredibly useful for preventing loops in your network, they can cause issues when it comes to dealing with oversubscription between Access Layer Switches (AS) and Distribution Layer Switches (DS). No matter how many links you add between switches, when STP is in place, only one link will be functioning at a time. This is am important function, as there would eventually be a broadcast storm between the two, and all network functionality would cease. EtherChannel deals with this by combining all of the physical interfaces into one logical interface. STP will treat this as a single interface, meaning we can maintain physical redundancy while preventing broadcast storms and increasing available bandwidth. Other names for this logical interface are the Port Channel or the Link Aggregation Group (LAG)
   Traffic that uses the EtherChannel will be load balanced among the physical interfaces of the group. Which specific interface is used is algorithmically determined.
 
 # How does EtherChannel Load Balance
+  
   Load balancing over EtherChannel is based on communications between two nodes in a network, also referred to as a "flow".
   A brief example could be as follows. You have a network consisting of six PC's connected to AS1, which is has four physical links to DS1,  which is connected to a server and a printer. PC1 wants to communicate with the Server. It forwards several frames to AS1, which then forwards the frame over the Port Channel to DS1 using the servers MAC address. The switch determines that the third interface will be used to forward the frame. If PC1 continues to send frames to the server, these are considered to be in the same "Flow", and they will continue to be forwarded on the same physical interface, which balances the bandwidth usage and keeps frames in the correct order. Now, PC1 wants to communicate with the printer. AS1 will forward the frames along another physical interface, interface 1. Then, PC2 wants to print something. AS1 determines that using interface 2 is the best choice for this function. This balances traffic to and from the printer, reducing congestion on the network.
   Which interface is used for which flow is calculated using several different factors, which can be changed. They are as follows:
@@ -17,6 +19,7 @@
     6- Source and Destination IP
 
 # Configuring an EtherChannel
+  
   To see the current configuration,use the following commands.
   
     1. In privileged exec mode,  _show etherchannel load-balance_. (This will display both general and per-protocol configurations.)
@@ -25,6 +28,7 @@
   Remember, etherchannel is the command used in the CISCO CLI to view the configuration, while port-channel is used to configure.
 
 # Methods of EtherChannel configuration on Layer 2 CISCO switches
+  
   There are three different methods of configuration 
   
     1- Port Aggrecation Protocol (PAgP): A CISCO proprietary protocol, it dynamically negotiates the creation and maintenance of EtherChannels between CISCO switches. Much like DTP does for trunking, it sends frames to the neighboring switch to determine whether or not it wants to form and EtherChannel.
@@ -53,6 +57,7 @@
   In addition to configuring the port channel, this will also configure the individual physical interfaces in the group the same way. This is crucial, as all interfaces in the group must have matching configurations, including not only the same switchport mode, but the same duplex, the same speed and the same native and allowed VLAN range. If one or more of the physical interfaces configurations do not match the group, they will be set to "suspended", and will not function until the configuration mismatch is fixed.
 
 # Notes on Layer 3 switches
+  
   Modern networks are shifting towards using layer three switches as the default, due to the fact that STP is not an issue between Layer 3 switches (layer 3 switches do not forward layer 2 frames, so there can be no layer 2 loop created). 
   To configure a Layer 3 EtherChannel, use the following commands.
   
