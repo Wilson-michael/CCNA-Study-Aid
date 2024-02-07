@@ -27,6 +27,8 @@ FD45:93AC:8A8F:0001:0000:0000:0000:0001/64.
 [FD]- this indicates a unique local address. [45:93AC:8A8F:]- this is the global id, which should be randomly generated in order to limit overlap between companies, in case of mergers. [0001:]- this is the subnet identifier, used to make various subnets. [0000:0000:0000:0001]- as in Global Unicast Addresses, this is the interface identifier, the host portion of the address.
 3: Link Local Addresses. These are IPv6 addresses that are automatically generated on IPv6 interfaces by using the command "ipv6 enable" when in interface config mode on a router. They technically use the FE80::/10 (FE80:: to FEBF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF) address block, however, the standard states that the 54 bits after FE80/10 need to be set to 0, so Link Local Addresses will never start with FE9, FEA or FEB, only FE8. The interface ID is generated using EUI-64 rules. Link-local means that these addresses are used for communication within a single link (subnet), meaning routers will not route packets with a link-local destination IPv6 address. Some uses for link-local addresses include: Routing protocol peerings (OSPFv3 uses link-local addresses for neighbor adjacencies), next-hop addresses for static routes, and Neighbor Discovery Protocol (NDP), which is IPv6's replacement for ARP. 
 4: Multicast addresses. These are used for communications from one source to multiple destinations that have joined the specific multicast group. IPv6 uses the range FF00::/8 (FF00:: to FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF) for its multicast. Unlike IPv4, IPv6 doesn't use broadcast, meaning there is no 'broadcast address' in IPv6. Below is a table with some important multicast addresses.
+
+## Multicast Address Table
 | Purpose                                    | IPv6 Address | IPv4 Address |
 |--------------------------------------------|--------------|--------------|
 | All nodes\hosts (functions like broadcast) | FF02::1      | 224.0.0.1    |
@@ -38,6 +40,7 @@ FD45:93AC:8A8F:0001:0000:0000:0000:0001/64.
 
 Another aspect of multicast addresses to be aware of is the scope. IPv6 defines multiple scopes that indicate how far a packet should be forwarded. They are as follows.
 
+## Multicast Scope Types
 | Type               | Address | Boundaries                                                                                                            |
 |--------------------|---------|-----------------------------------------------------------------------------------------------------------------------|
 | Interface-local    | FF01    | The packet doesn't leave the local device, and can be used to send traffic to a service within the local device.      |
