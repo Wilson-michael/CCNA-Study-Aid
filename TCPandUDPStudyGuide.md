@@ -17,8 +17,25 @@ Ephemeral/private/dynamic: 49152-65535. These are used for random source ports.
 
 # TCP
     
-TCP is a connection-oriented protocol, meaning that before actually sending data to the destination host, the two hosts communicate to establish a connection, called a "three-way handshake". A host will send a TCP segment with the SYN flag set to 1. The receiving host will then reply with a TCP segment with the SYN and ACK flags set to 1. The first host will send a final segment with the ACK flag set to 1, completing the 3-way handshake. Once the connection is established, the data exchange begins. When the host wants to terminate a TCP connection, it does so through a "Four-way handshake". It sends the second host a TCP segment with the FIN flag set to 1. The second host replies with a segment with the ACK flag set to 1, then another segment with the FIN flag set to 1.  The first host finalizes the handshake by sending a segment with the ACK flag set to 1.
+TCP is a connection-oriented protocol, meaning that before actually sending data to the destination host, the two hosts communicate to establish a connection, called a "three-way handshake". 
+A host will send a TCP segment with the SYN flag set to 1. 
+
+The receiving host will then reply with a TCP segment with the SYN and ACK flags set to 1. 
+
+The first host will send a final segment with the ACK flag set to 1, completing the 3-way handshake. 
+
+Once the connection is established, the data exchange begins. 
+
+When the host wants to terminate a TCP connection, it does so through a "Four-way handshake". 
+
+It sends the second host a TCP segment with the FIN flag set to 1. 
+
+The second host replies with a segment with the ACK flag set to 1, then another segment with the FIN flag set to 1.  
+
+The first host finalizes the handshake by sending a segment with the ACK flag set to 1.
+
 What are the benefits of using TCP?
+
 It provides reliable communication, as the destination host must acknowledge that it received each TCP segment. If it doesn't, the segment must be sent again.
 It provides sequencing, with the TCP header containing sequence numbers that allow destination hosts to put segments in the correct order even if they arrive out of order.
 Finally, it provides flow control, using the window size field to allow the destination host to tell the source host to increase or decrease the rate at which the data is sent.
