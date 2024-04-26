@@ -48,17 +48,26 @@ Another method is replacing consecutive quartets of all 0s with a double colon (
 
 IPv6 prefixes denote the global unicast address for a given set of IPv6 addresses.
 Typically, an enterprise that requests IPv6 addresses from their ISP will recive a /48 block.
+
 IPv6 subnets typically use a /64 prefix length.
 This means that an enterprise will usually have 16 bits available to make subnets.
 Here is an example:
+
 2001:0DB8:8B00:0001:0000:0000:0000:0001/64
+
 2001:0DB8:8B00: is the global routing prefix of the address assigned by the ISP
+
 0001: is the subnet identifier portion of the address, used by the enterprise to make various subnets.
 These two combine to create the network portion of the address.
+
 The last portion of the address, 0000:0000:0000:0001 is the 64-interface indentifier, the host portion of the address.
+
 To find the IPv6 prefix of a /64 network, simply replace the second half of the address with all 0s, e.g 2001:0DB8:8B00:0001:0000:0000:0000:0001/64 is  2001:DB8:8B00:1::/64. If the prefix length is a multiple of 4, it is still simple to find the prefix. 
+
 For example, if you have a network address 300D:00F2:   0B34:2100:0000:0000:1200:0001/56, simply add the value of bits in each portion of the address together until you come to the correct number: 300D =16, 00F2 = 32, 0B34 = 48, 2 = 52, and 1 = 56, meaning that the prefix is 300D:F2:B34:2100::/56. Note that even though the 0s in 2100 are a part of the host portion of the network, they cannot be removed, as that would give a network address of 300D:F2:B34:21::/56, which, after replacing the leading 0s is 300D:00F2:0B34:0021::/56, a completely different address. 
+
 If the prefix length is not a multiple of 4, there are some added steps. 
 For example, the address 2001:0DB8:8B00:0001:FB89:017B:0020:0011/93
+
 Begin as you would with a prefix length divisible by 4, in this case going to 017, which is 92 bits. Then, convert B to 0b, which is 1011 (11 in 0d). We need the first bit, so we convert the remaining bits to 0, then convert it it back to 0x, making it 0x8. This makes the newtork prefix of this address 2001:DB8:8B00:1:FB89:178. 
     
