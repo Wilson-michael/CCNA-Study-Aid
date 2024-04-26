@@ -5,9 +5,11 @@
 This study guide will cover IPV6 for the CCNA exam.
 
 # Hexadecimal
+
 IPV6 uses Hexadecimal for it's addressing scheme. It is denoted by using 0x, rather than 0b for binary or 0d for decimal. Below is a table comparing how values are noted in each of these systems.
 
 ## Hexadecimal Table
+
 | Decimal | Binary | Hexadecimal |
 |---------|--------|-------------|
 | 0       | 0000   | 0           |
@@ -28,6 +30,7 @@ IPV6 uses Hexadecimal for it's addressing scheme. It is denoted by using 0x, rat
 | 15      | 1111   | f           |
 
 # Why do we need IPv6
+
 Simply put, there are no longer enough IPv4 addresses available for us. When IPv4 was originally implemented, the idea that 4 billion plus addresses wouldn't be able to cover all of the needs of the internet was inconcievable.  IPv4 addresses are assigned by IANA, which distributes IPv4 address space to various Regional Internet Registries (RIRs), which assign them to companies that need them. The north american RIR, ARIN, exhausted its address pool in September of 2015, and in August of 2020, the latin american RIR, LACNIC, assigned its final IPv4 address. However, as the size of the internet has grown, different measures such as VLSM, private IPv4 address spaces and NAT have been implemented to conserve the available IPv4 addresses. These are just short term solutions, and a more permanent option had to be designed. Enter IPv6. 
 
 By utilizing 32 hexadecimal characters consisting of 0-9 and A-F separated into 8 groups of 4 separated by colons to create a total of 2^128 (around 340 undeciillion) addresses. Below is an example of an IPv6 address written in binary, decimal and hexadecimal.
@@ -71,3 +74,21 @@ For example, the address 2001:0DB8:8B00:0001:FB89:017B:0020:0011/93
 
 Begin as you would with a prefix length divisible by 4, in this case going to 017, which is 92 bits. Then, convert B to 0b, which is 1011 (11 in 0d). We need the first bit, so we convert the remaining bits to 0, then convert it it back to 0x, making it 0x8. This makes the newtork prefix of this address 2001:DB8:8B00:1:FB89:178. 
     
+## Configuring IPv6
+
+To configure IPv6 Routing on a Cisco Router, enter the following commands from Global Config mode:
+
+_ipv6 unicast-routing_- Required to enable IPv6 Routing.
+
+_(the interface on which you want to configure IPv6)_
+
+_ipv6 address (the ipv6 address and slash notation you want to assign, e.g. 2001:db8:0:0::1/64)_- Note that you can use the shortened or full address, the router will understand.
+
+_no shutdown_
+
+Repeat for all desired IPv6 interfaces.
+
+To vew your IPv6 enabled interfaces and basic details, enter the Priveleged Exec command _show ipv6 interface brief_.
+
+This has covered the first portion of IPv6 Addressing for the CCNA Exam.
+
