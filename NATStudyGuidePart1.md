@@ -20,6 +20,8 @@ These addresses don't have to be globally unique, and can be freely used in netw
 
 NAT is used to modify the source and/or destination IP addresses of packets. The most common reason to use NAT is to allow hosts with private IP addresses to communicate with other hosts over the internet as discussed above. The CCNA requires an understanding of source NAT and its configuration on Cisco routers. Source NAT is when a router uses NAT to convert the source IP of a packet (the device IP) to its ISP assigned address, and the reverse for packets recieved from external sources.
 
+One additional note on the subject of Static NAT. It not only allows internal hosts to access external hosts, it also allows the reverse, meaning that any external host could send a packet to the inside global address and the router would direct it to the proper end device.
+
 # Static NAT
 
 Static NAT is the process of statically configuring one-to-one mappings of private to public IP addresses, where  an inside local IP address is mapped to an inside global IP address. An inside local address is that of the inside host from the perspective of the local network, typically the private address that is actually configured on the inside host. An inside global access is the IP address of the inside host from the perspective of outside hosts, typically the public address configured through NAT. 
