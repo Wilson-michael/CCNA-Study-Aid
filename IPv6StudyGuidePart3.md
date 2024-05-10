@@ -2,7 +2,7 @@
 
 # Overview
 
-This is the final portion of the IPv6 study guide for the CCNA Exam. It will cover the IPv6 Heaader, Solicited-Node Multicast Address (SNMA), Neighbor Discovery Protocol (NDP), SLAAC, and IPv6 Static Routing.
+This is the final portion of the IPv6 study guide for the CCNA Exam. It will cover the [IPv6 Heaader](#ipv6-header), [Solicited-Node Multicast Address (SNMA)](#Solicited-node-multicast-address), [Neighbor Discovery Protocol (NDP)](#ndp), [SLAAC](#stateless-address-auto-configuration-(slaac)), and [IPv6 Static Routing](#ipv6-static-routing).
 
 # IPv6 Header
 
@@ -30,22 +30,35 @@ This function of NDP allows hosts to see if other devices on the local link are 
 
 # IPv6 Static Routing
 
-IPv6 routing works the same as IPv4 routing. A router receives a packet on an interface, it looks up the destination address in its routing table, then forwards it according to the most specific match in the table. However, IPv4 and IPv6 routing processes and tables are separate on the router. IPv4 is enabled by default, while IPv6 is disabled by default, and must be enabled with the command "ipv6 unicast-routing". If it is not enabled, the router will be able to send and receive IPv6 traffic, but not route it (forward it between networks). There are multiple IPv6 routes in the routing table, listed here. 
+IPv6 routing works the same as IPv4 routing. A router receives a packet on an interface, it looks up the destination address in its routing table, then forwards it according to the most specific match in the table. However, IPv4 and IPv6 routing processes and tables are separate on the router. IPv4 is enabled by default, while IPv6 is disabled by default, and must be enabled with the command "ipv6 unicast-routing". If it is not enabled, the router will be able to send and receive IPv6 traffic, but not route it (forward it between networks). There are multiple IPv6 routes in the routing table, listed here.
+
 1: Network Route. These are automatically added for each connected network.
+
 2: Host Route. These are automatically added for each address configured on the router.
+
 3: Static Routes: There are multiple types of IPv6 static routes, and they are determined by how you configure them, as shown below.
 
 # Configuring IPv6 Static Routes
 
 Ciscos command for configuring a static IPv6 route is as follows:
+
 "ipv6 route (destination/prefix length){next-hop | interface [next-hop]}[ad]"
+
 In Cisco documentation {} indicates a required choice, in this instance either a next-hop address or an exit-interface with an optional next-hop address, optional being indicated by the []. This means that the AD is optional too.
 The type of static route configured is determined by what you choose to input. 
+
 First is the directly attached static route, where only the exit interface is specified. Note, for Cisco routers, this command cannot be used if the interface is an Ethernet interface.
+
 Here is an example of this configuration : "ipv6 route 2001:db8:0:3::/64 g0/0"
+
 Second is a Recursive static route, where only the next-hop is specified. The reason for the designation recursive is due to the fact that during this process, the router must look up its routing table multiple times (a recursive lookup) to find the destination, then the next hop. 
+
 Here is an example Recursive static route configuration command: "ipv6 route 2001:db8:0:3::/64 2001:db8:0:12::2"
+
 Third is the Fully Specified static route, where both the exit interface and the next-hop are specified.
+
 Here is an example config command: "ipv6 route 2001:db8:0:3::/64 g0/0 2001:db8:0:12::2"
+
 Finally, the floating static route. This is configured by raising the AD to be higher than the AD of the routing protocol used in the network. Always set the AD to higher than the main route.
+
 If you want to use a link-local address as the next-hop, you must specify the exit interface, aka a fully specified static route. This is due to the fact that a router cannot figure out on its own which interface a next-hop link local address is connected to.
