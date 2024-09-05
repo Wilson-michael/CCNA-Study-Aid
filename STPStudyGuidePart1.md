@@ -2,7 +2,7 @@
 
 # Overview
 
-This is a study guide on the topic of Spanning Tree Protoco (STP) for the purpose of the CCNA exam. It will cover[redundancy in networks](#redundancy_in_networks) and [Spanning Tree Protocol](#STP).
+This is a study guide on the topic of Spanning Tree Protoco (STP) for the purpose of the CCNA exam. It will cover [redundancy in networks](#redundancy_in_networks) and [Spanning Tree Protocol](#STP).
 
 # Redundancy in networks
 
